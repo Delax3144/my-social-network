@@ -14,7 +14,7 @@ body {
     padding-inline: 24px;
 }
 
-p {
+.subtext {
     color: black;
     opacity: 60%;
 }

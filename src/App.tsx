@@ -23,7 +23,7 @@ function App() {
   return (
     <main className="container">
       <h1>Лента</h1>
-      <p>Мысли, которыми хочется поделиться</p>
+      <p className="subtext">Мысли, которыми хочется поделиться</p>
       <PostComposer onPublish={handlePublish}/>
       <h2>Последние посты</h2>
       {posts.map((post) => (

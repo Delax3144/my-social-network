@@ -31,6 +31,7 @@ const PostComposer = ({ onPublish }: PostComposerProps) => {
                         setText('')
                     }}
                     disabled={isEmpty}
+                    className={styles.postButton}
                 >
                 Создать пост</button>
             </div>

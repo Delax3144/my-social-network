@@ -19,7 +19,7 @@
     resize: vertical;
 }
 
-button {
+.postButton {
     width: 126px;
     height: 44px;
 }
