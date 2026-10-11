@@ -1,0 +1,35 @@
+.composer {
+    background-color: #fff;
+    border: 1px solid #dce3ed;
+    border-radius: 12px;
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input {
+    width: 100%;
+    min-height: 112px;
+    padding: 16px;
+    border: 1px solid #dce3ed;
+    border-radius: 8px;
+    font: inherit;
+    resize: vertical;
+}
+
+button {
+    width: 126px;
+    height: 44px;
+}
+
+.btnArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text {
+    font-size: 14px;
+}
