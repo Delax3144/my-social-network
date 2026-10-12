@@ -1,55 +1,100 @@
 .header {
-    background-color: #fff;
+    background-color: #f6f1e7;
 }
 
-.inner {
-    min-height: 88px;
+.container {
+    max-width: 1168px;
+    min-height: 89px;
+    margin: 0 auto;
+    padding: 0 24px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 40px;
+    position: relative;
+}
+
+.container::after {
+    content: "";
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+    left: 24px;
+    height: 1px;
+    background-color: #ded6c7;
 }
 
 .logo {
-    text-decoration: none;
     display: flex;
-    gap: 8px;
     align-items: center;
+    gap: 12px;
+    margin-right: auto;
+    color: #292b23;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 40px;
+    text-decoration: none;
 }
 
-.logoImg {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    display: block;
+.logoSymbol {
+    color: #b64b30;
+    font-size: 32px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.link {
+    padding: 12px 0;
+    border-bottom: 2px solid transparent;
+    color: #79766a;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.link:hover,
+.active {
+    color: #b64b30;
+    border-bottom-color: #b64b30;
 }
 
 .avatar {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    background-color: #eff4ff;
-    color: #2563eb;
-    font-size: 14px;
-
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-}
-
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.name {
-    color: #667085;
+    border-radius: 4px;
+    background-color: #efdaca;
+    color: #b64b30;
+    font-family: Arial, sans-serif;
     font-size: 14px;
 }
 
-.logoName {
-    color: black;
-    font-size: 20px;
-    font-weight: bold;
+.logo:focus-visible,
+.link:focus-visible {
+    outline: 2px solid #b64b30;
+    outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+    .container {
+        min-height: 137px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: center;
+        gap: 12px;
+    }
+
+    .logo {
+        font-size: 36px;
+    }
+
+    .navigation {
+        order: 3;
+        width: 100%;
+    }
 }

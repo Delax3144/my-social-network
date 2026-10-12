@@ -1,24 +1,25 @@
-import styles from "./Header.module.css"
-import logo from "../../images/logo.png";
+import styles from "./Header.module.css";
 
 const Header = () => {
     return (
         <header className={styles.header}>
-            <div className={`container ${styles.inner}`}>
-                <a 
-                    href="/"
-                    className={styles.logo}
-                >
-                <img className={styles.logoImg} src={logo} alt="Круг - главная" />
-                <p className={styles.logoName}>круг</p>
+            <div className={styles.container}>
+                <a href="/" className={styles.logo} aria-label="Threloom — главная">
+                    <span className={styles.logoSymbol} aria-hidden="true">#</span>
+                    <span>threloom</span>
                 </a>
-                <div className={styles.profile}>
-                    <span className={styles.name}>Василий Триндюк</span>
-                    <span className={styles.avatar}>ВТ</span>
-                </div>
+
+                <nav className={styles.navigation} aria-label="Основная навигация">
+                    <a href="/" className={`${styles.link} ${styles.active}`} aria-current="page">
+                        Лента
+                    </a>
+                    <a href="/users/vasiliy" className={styles.link}>Мой профиль</a>
+                </nav>
+
+                <span className={styles.avatar} aria-label="Василий Триндюк">ВТ</span>
             </div>
         </header>
-    )
-}
+    );
+};
 
 export default Header;
