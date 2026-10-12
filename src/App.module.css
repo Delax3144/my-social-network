@@ -1,0 +1,46 @@
+.intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 352px;
+    align-items: start;
+    gap: 48px;
+    padding-top: 56px;
+    margin-bottom: 64px;
+}
+
+.label {
+    margin: 0 0 20px;
+    color: #b64b30;
+    font-size: 12px;
+}
+
+.title {
+    margin: 0 0 24px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.description {
+    margin: 0;
+    color: #79766a;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+@media (max-width: 767px) {
+    .intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+        padding-top: 32px;
+        margin-bottom: 48px;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+}

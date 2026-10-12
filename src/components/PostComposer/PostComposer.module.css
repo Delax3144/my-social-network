@@ -1,35 +1,66 @@
 .composer {
-    background-color: #fff;
-    border: 1px solid #dce3ed;
-    border-radius: 12px;
-    padding: 24px;
-
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    min-width: 0;
+    padding: 24px;
+    border-radius: 4px;
+    background-color: #efdaca;
+}
+
+.label {
+    margin-bottom: 16px;
+    color: #b64b30;
+    font-size: 12px;
 }
 
 .input {
     width: 100%;
-    min-height: 112px;
+    min-height: 120px;
     padding: 16px;
-    border: 1px solid #dce3ed;
-    border-radius: 8px;
+    border: 1px solid #ded6c7;
+    border-radius: 4px;
+    background-color: #fffcf7;
+    color: #292b23;
     font: inherit;
+    font-size: 14px;
+    line-height: 1.5;
     resize: vertical;
 }
 
-.postButton {
-    width: 126px;
-    height: 44px;
+.input::placeholder {
+    color: #79766a;
 }
 
-.btnArea {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.hint {
+    margin: 16px 0 12px;
+    color: #79766a;
+    font-size: 12px;
 }
 
-.text {
+.button {
+    min-height: 48px;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 4px;
+    background-color: #b64b30;
+    color: #fff;
+    font: inherit;
     font-size: 14px;
+    cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+    background-color: #983d27;
+}
+
+.button:disabled {
+    background-color: #dcd5c5;
+    color: #79766a;
+    cursor: default;
+}
+
+.input:focus-visible,
+.button:focus-visible {
+    outline: 2px solid #b64b30;
+    outline-offset: 3px;
 }
