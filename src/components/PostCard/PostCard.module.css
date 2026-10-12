@@ -1,7 +1,120 @@
-.card {
-    background-color: #fff;
-    border: 1px solid #dce3ed;
-    border-radius: 12px;
-    padding: 24px;
-    margin: 16px 0px;
+.post {
+    display: grid;
+    grid-template-columns: 168px minmax(0, 1fr);
+    gap: 48px;
+    padding: 32px 0;
+    border-bottom: 1px solid #ded6c7;
+}
+
+.author {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: #efdaca;
+    color: #b64b30;
+    font-size: 14px;
+}
+
+.authorInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.name {
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.date {
+    color: #79766a;
+    font-size: 12px;
+}
+
+.content {
+    min-width: 0;
+}
+
+.label {
+    margin: 0 0 20px;
+    color: #79766a;
+    font-size: 12px;
+}
+
+.text {
+    margin: 0 0 16px;
+    font-size: 18px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.reaction {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #79766a;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 20px;
+}
+
+.reaction:hover {
+    background-color: #ece6da;
+}
+
+.reaction.liked {
+    background-color: #e7ebd3;
+    color: #626c3e;
+}
+
+.reaction:focus-visible {
+    outline: 2px solid #626c3e;
+    outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+    .post {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        padding: 28px 0;
+    }
+
+    .author {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .authorInfo {
+        gap: 4px;
+    }
+
+    .label {
+        display: none;
+    }
+
+    .text {
+        font-size: 16px;
+    }
 }

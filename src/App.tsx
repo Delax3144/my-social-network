@@ -33,14 +33,24 @@ function App() {
         </div>
         <PostComposer onPublish={handlePublish} />
       </section>
-      <h2>Последние посты</h2>
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
+      <section aria-labelledby="posts-title">
+        <div className={styles.feedHeading}>
+          <h2 id="posts-title" className={styles.feedTitle}>Свежие строки</h2>
+          <span className={styles.count}>{String(posts.length).padStart(2, "0")} / {String(posts.length).padStart(2, "0")}</span>
+        </div>
+        {posts.map((post, index) => (
+          <PostCard key={post.id} post={post} number={index + 1} />
+        ))}
+      </section>
+      <footer className={styles.footer}>
+        <p>Пока это всё. Оставим немного места для нового.</p>
+        <p>threloom · пространство для мыслей</p>
+      </footer>
     </main>
   )
 }
 
 export default App
+
 
 
