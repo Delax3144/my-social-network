@@ -14,6 +14,7 @@
 }
 
 .avatar {
+    text-decoration: none;
     width: 40px;
     height: 40px;
     display: flex;
@@ -33,6 +34,8 @@
 }
 
 .name {
+    color: inherit;
+    text-decoration: none;
     font-size: 14px;
     font-weight: 600;
     overflow-wrap: anywhere;
@@ -117,4 +120,15 @@
     .text {
         font-size: 16px;
     }
+}
+
+.name:hover {
+    color: #b64b30;
+    text-decoration: underline;
+}
+
+.name:focus-visible,
+.avatar:focus-visible {
+    outline: 2px solid #b64b30;
+    outline-offset: 3px;
 }

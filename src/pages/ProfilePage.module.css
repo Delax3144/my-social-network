@@ -1,0 +1,87 @@
+.profile {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 48px;
+    padding-top: 56px;
+    margin-bottom: 64px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.avatar {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: #efdaca;
+    color: #b64b30;
+    font-size: 24px;
+}
+
+.username,
+.count {
+    color: #79766a;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.description {
+    min-width: 0;
+}
+
+.label {
+    margin: 0 0 24px;
+    color: #b64b30;
+    font-size: 12px;
+}
+
+.name {
+    max-width: 450px;
+    margin: 0 0 24px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.bio {
+    max-width: 620px;
+    margin: 0;
+    color: #79766a;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.notFound {
+    padding: 56px 0;
+}
+
+.notFound a {
+    color: #b64b30;
+}
+
+@media (max-width: 767px) {
+    .profile {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+        padding-top: 32px;
+        margin-bottom: 48px;
+    }
+
+    .name {
+        max-width: 300px;
+        font-size: 40px;
+    }
+
+    .bio {
+        font-size: 16px;
+    }
+}

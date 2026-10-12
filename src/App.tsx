@@ -1,56 +1,63 @@
 import { useState } from "react";
-
-import PostCard from "./components/PostCard/PostCard"
-import PostComposer from "./components/PostComposer/PostComposer";
+import { Link, Route, Routes } from "react-router-dom";
+import Header from "./components/Header/Header";
+import FeedPage from "./pages/FeedPage";
+import ProfilePage from "./pages/ProfilePage";
+import { currentUser, users } from "./data/users";
 import data from "../data.json";
 import styles from "./App.module.css";
 import type { Post } from "./types/post";
 
 function App() {
-  const initialState = data.posts;
+    const [posts, setPosts] = useState<Post[]>(() => {
+        return data.posts.map((post) => ({
+            ...post,
+            authorId: users.find((user) => user.username === post.username)?.id ?? post.username,
+            isLiked: false,
+        })).sort((first, second) => Date.parse(second.createdAt) - Date.parse(first.createdAt));
+    });
 
-  const [posts, setPosts] = useState(initialState);
+    const handlePublish = (text: string) => {
+        if (text.trim() === "") return;
 
-  const handlePublish = (text: string) => {
-    const newPost: Post = {
-      id: crypto.randomUUID(),
-      username: "Delax314",
-      text: text,
-      createdAt: new Date().toISOString(),
+        const newPost: Post = {
+            id: crypto.randomUUID(),
+            authorId: currentUser.id,
+            username: currentUser.username,
+            text,
+            createdAt: new Date().toISOString(),
+            isLiked: false,
+        };
+        setPosts((previousPosts) => [newPost, ...previousPosts]);
     };
-    setPosts([newPost, ...posts])
-  }
 
-  return (
-    <main className="container">
-      <section className={styles.intro} aria-labelledby="feed-title">
-        <div>
-          <p className={styles.label}>ЛЕНТА / 01</p>
-          <h1 id="feed-title" className={styles.title}>Мысли между<br />строк.</h1>
-          <p className={styles.description}>
-            Небольшие заметки о том, что замечаем,<br />узнаём и чувствуем.
-          </p>
-        </div>
-        <PostComposer onPublish={handlePublish} />
-      </section>
-      <section aria-labelledby="posts-title">
-        <div className={styles.feedHeading}>
-          <h2 id="posts-title" className={styles.feedTitle}>Свежие строки</h2>
-          <span className={styles.count}>{String(posts.length).padStart(2, "0")} / {String(posts.length).padStart(2, "0")}</span>
-        </div>
-        {posts.map((post, index) => (
-          <PostCard key={post.id} post={post} number={index + 1} />
-        ))}
-      </section>
-      <footer className={styles.footer}>
-        <p>Пока это всё. Оставим немного места для нового.</p>
-        <p>threloom · пространство для мыслей</p>
-      </footer>
-    </main>
-  )
+    const handleLike = (id: string) => {
+        setPosts((previousPosts) => previousPosts.map((post) => {
+            return post.id === id ? { ...post, isLiked: !post.isLiked } : post;
+        }));
+    };
+
+    return (
+        <>
+            <Header />
+            <main className="container">
+                <Routes>
+                    <Route path="/" element={<FeedPage posts={posts} onPublish={handlePublish} onLike={handleLike} />} />
+                    <Route path="/users/:id" element={<ProfilePage posts={posts} onLike={handleLike} />} />
+                    <Route path="*" element={
+                        <section className={styles.notFound}>
+                            <h1>Страница не найдена</h1>
+                            <Link to="/">Вернуться в ленту</Link>
+                        </section>
+                    } />
+                </Routes>
+                <footer className={styles.footer}>
+                    <p>Пока это всё. Оставим немного места для нового.</p>
+                    <p>threloom · пространство для мыслей</p>
+                </footer>
+            </main>
+        </>
+    );
 }
 
-export default App
-
-
-
+export default App;
