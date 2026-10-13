@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import FeedPage from "./pages/FeedPage";
@@ -7,15 +7,23 @@ import { currentUser, users } from "./data/users";
 import data from "../data.json";
 import styles from "./App.module.css";
 import type { Post } from "./types/post";
+import { loadPosts, savePosts } from "./lib/postStorage";
 
 function App() {
     const [posts, setPosts] = useState<Post[]>(() => {
-        return data.posts.map((post) => ({
+        const initialPosts = data.posts.map((post) => ({
             ...post,
             authorId: users.find((user) => user.username === post.username)?.id ?? post.username,
             isLiked: false,
         })).sort((first, second) => Date.parse(second.createdAt) - Date.parse(first.createdAt));
+        return loadPosts(initialPosts);
     });
+
+    useEffect(() => {
+        if (!savePosts(posts)) {
+            console.warn("Не удалось сохранить посты в браузере. После перезагрузки изменения могут исчезнуть.");
+        }
+    }, [posts]);
 
     const handlePublish = (text: string) => {
         if (text.trim() === "") return;
