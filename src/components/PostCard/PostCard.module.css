@@ -132,3 +132,25 @@
     outline: 2px solid #b64b30;
     outline-offset: 3px;
 }
+
+.deleteButton {
+    min-height: 44px;
+    margin-left: 12px;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #b64b30;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    background-color: #efdaca;
+}
+
+.deleteButton:focus-visible {
+    outline: 2px solid #b64b30;
+    outline-offset: 3px;
+}

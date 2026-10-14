@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { currentUser } from "../../data/users";
 import type { Post } from "../../types/post";
 import type { User } from "../../types/user";
 import styles from "./PostCard.module.css";
@@ -8,9 +9,10 @@ type PostCardProps = {
     author?: User;
     number: number;
     onLike: (id: string) => void;
+    onDelete?: (id: string) => void;
 };
 
-const PostCard = ({ post, author, number, onLike }: PostCardProps) => {
+const PostCard = ({ post, author, number, onLike, onDelete }: PostCardProps) => {
     const name = author?.name ?? post.username;
     const initials = author?.initials ?? name.slice(0, 1).toUpperCase();
     const date = new Date(post.createdAt);
@@ -43,6 +45,15 @@ const PostCard = ({ post, author, number, onLike }: PostCardProps) => {
                     <span>Отклик</span>
                     <span>{post.isLiked ? 1 : 0}</span>
                 </button>
+                {onDelete && post.authorId === currentUser.id && (
+                    <button
+                        type="button"
+                        className={styles.deleteButton}
+                        onClick={() => onDelete(post.id)}
+                    >
+                        Удалить
+                    </button>
+                )}
             </div>
         </article>
     );

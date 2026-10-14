@@ -7,9 +7,10 @@ type PostListProps = {
     title: string;
     posts: Post[];
     onLike: (id: string) => void;
+    onDelete?: (id: string) => void;
 };
 
-const PostList = ({ title, posts, onLike }: PostListProps) => {
+const PostList = ({ title, posts, onLike, onDelete }: PostListProps) => {
     const count = String(posts.length).padStart(2, "0");
 
     return (
@@ -28,6 +29,7 @@ const PostList = ({ title, posts, onLike }: PostListProps) => {
                         author={users.find((user) => user.id === post.authorId)}
                         number={index + 1}
                         onLike={onLike}
+                        onDelete={onDelete}
                     />
                 ))
             )}

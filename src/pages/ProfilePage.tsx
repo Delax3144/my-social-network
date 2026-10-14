@@ -1,15 +1,16 @@
 import { Link, useParams } from "react-router-dom";
 import PostList from "../components/PostList/PostList";
-import { users } from "../data/users";
+import { currentUser, users } from "../data/users";
 import type { Post } from "../types/post";
 import styles from "./ProfilePage.module.css";
 
 type ProfilePageProps = {
     posts: Post[];
     onLike: (id: string) => void;
+    onDelete: (id: string) => void;
 };
 
-const ProfilePage = ({ posts, onLike }: ProfilePageProps) => {
+const ProfilePage = ({ posts, onLike, onDelete }: ProfilePageProps) => {
     const { id } = useParams();
     const user = users.find((item) => item.id === id);
 
@@ -38,7 +39,7 @@ const ProfilePage = ({ posts, onLike }: ProfilePageProps) => {
                     <p className={styles.bio}>{user.bio}</p>
                 </div>
             </section>
-            <PostList title="Из записанного" posts={userPosts} onLike={onLike} />
+            <PostList title="Из записанного" posts={userPosts} onLike={onLike} onDelete={user.id === currentUser.id ? onDelete : undefined} />
         </>
     );
 };

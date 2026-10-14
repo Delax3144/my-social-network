@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
+import DeletePostDialog from "./components/DeletePostDialog/DeletePostDialog";
 import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
 import { currentUser, users } from "./data/users";
@@ -10,6 +11,7 @@ import type { Post } from "./types/post";
 import { loadPosts, savePosts } from "./lib/postStorage";
 
 function App() {
+    const [deletePostId, setDeletePostId] = useState<string | null>(null);
     const [posts, setPosts] = useState<Post[]>(() => {
         const initialPosts = data.posts.map((post) => ({
             ...post,
@@ -39,6 +41,21 @@ function App() {
         setPosts((previousPosts) => [newPost, ...previousPosts]);
     };
 
+    const postToDelete = posts.find((post) => post.id === deletePostId);
+
+    const handleDelete = (id: string) => {
+        const post = posts.find((item) => item.id === id);
+        if (!post || post.authorId !== currentUser.id) return;
+        setDeletePostId(id);
+    };
+
+    const confirmDelete = () => {
+        setPosts((previousPosts) => previousPosts.filter((post) => {
+            return post.id !== deletePostId || post.authorId !== currentUser.id;
+        }));
+        setDeletePostId(null);
+    };
+
     const handleLike = (id: string) => {
         setPosts((previousPosts) => previousPosts.map((post) => {
             return post.id === id ? { ...post, isLiked: !post.isLiked } : post;
@@ -48,10 +65,17 @@ function App() {
     return (
         <>
             <Header />
+            {postToDelete && (
+                <DeletePostDialog
+                    text={postToDelete.text}
+                    onCancel={() => setDeletePostId(null)}
+                    onConfirm={confirmDelete}
+                />
+            )}
             <main className="container">
                 <Routes>
                     <Route path="/" element={<FeedPage posts={posts} onPublish={handlePublish} onLike={handleLike} />} />
-                    <Route path="/users/:id" element={<ProfilePage posts={posts} onLike={handleLike} />} />
+                    <Route path="/users/:id" element={<ProfilePage posts={posts} onLike={handleLike} onDelete={handleDelete} />} />
                     <Route path="*" element={
                         <section className={styles.notFound}>
                             <h1>Страница не найдена</h1>
